@@ -20,7 +20,7 @@ function App() {
   const handleInput = (ev) => {
     const inputName = ev.target.name;
     const inputValue = ev.target.value;
-    let randomID = crypto.randomUUID()
+    const randomID = crypto.randomUUID()
     setNewAdalaber(
       { ...newAdalaber, [inputName]: inputValue, id: randomID }
     )
@@ -35,6 +35,8 @@ function App() {
       id: '',
     })
   };
+  //filtrar por nombre
+  const handleSearchName = () => { };
   //pintar la tabla con los contactos
   const renderAdalaber = () => {
     return adalabers.map((each) => (
@@ -46,7 +48,12 @@ function App() {
   };
   return (
     <div className='App'>
-      <header><h1>Adalabers</h1></header>
+      <header>
+        <h1>Adalabers</h1>
+        <h2>Busca una Adalaber</h2>
+        <label htmlFor="searchName">Nombre</label>
+        <input type="text" name="searchName" onChange={handleSearchName} />
+      </header>
       <table className="table">
         {/* <!-- Fila de cabecera --> */}
         <thead><tr>
