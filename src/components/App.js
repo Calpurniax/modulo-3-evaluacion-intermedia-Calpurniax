@@ -10,6 +10,7 @@ function App() {
     counselor: '',
     speciality: '',
     id: '',
+    social_networks: []
   })
   //variables de búsqueda
   const [searchValue, setSearchValue] = useState('');
@@ -37,8 +38,10 @@ function App() {
       counselor: '',
       speciality: '',
       id: '',
+      social_networks: []
     })
   };
+  console.dir(adalabers.social_networks);
   //filtrar por nombre
   const handleSearchName = (ev) => {
     setSearchValue(ev.target.value)
@@ -57,6 +60,10 @@ function App() {
           <td>{each.name}</td>
           <td>{each.counselor}</td>
           <td>{each.speciality}</td>
+          <td>
+            {each.social_networks.map((socialNetwork) =>
+              <a href={socialNetwork.url}>{socialNetwork.name}</a>)}
+          </td>
         </tr>))
   };
   return (
@@ -79,11 +86,14 @@ function App() {
       </header>
       <table className="table">
         {/* <!-- Fila de cabecera --> */}
-        <thead><tr>
-          <th>Nombre</th>
-          <th>Tutora</th>
-          <th>Especialidad</th>
-        </tr></thead>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tutora</th>
+            <th>Especialidad</th>
+            <th>Redes</th>
+          </tr>
+        </thead>
         {/* <!-- Cuerpo de la tabla --> */}
         <tbody>
           {renderAdalaber()}
