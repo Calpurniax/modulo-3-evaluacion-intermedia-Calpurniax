@@ -20,8 +20,9 @@ function App() {
   const handleInput = (ev) => {
     const inputName = ev.target.name;
     const inputValue = ev.target.value;
+    let randomID = crypto.randomUUID()
     setNewAdalaber(
-      { ...newAdalaber, [inputName]: inputValue }
+      { ...newAdalaber, [inputName]: inputValue, id: randomID }
     )
   };
   //añadir el nuevo contacto al array de objetos
