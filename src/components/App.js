@@ -11,7 +11,10 @@ function App() {
     speciality: '',
     id: '',
   })
+  //variables de búsqueda
   const [searchValue, setSearchValue] = useState('');
+  const [searchCounselor, setSearchCounselor] = useState('');
+
 
   //para que no se envíe el formulario al pulsar intro
   const handleSubmit = (ev) => {
@@ -40,10 +43,15 @@ function App() {
   const handleSearchName = (ev) => {
     setSearchValue(ev.target.value)
   };
+  const handleSearchCounselor = (ev) => {
+    setSearchCounselor(ev.target.value)
+  };
+
   //pintar la tabla con los contactos
   const renderAdalaber = () => {
     return adalabers
       .filter((each) => each.name.toLowerCase().includes(searchValue.toLowerCase()))
+      .filter((each) => each.counselor.toLowerCase().includes(searchCounselor))
       .map((each) => (
         <tr key={each.id}>
           <td>{each.name}</td>
@@ -57,8 +65,16 @@ function App() {
         <h1>Adalabers</h1>
         <h2>Busca una Adalaber</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="searchName">Nombre</label>
+          <label htmlFor="searchName">Nombre:</label>
           <input type="text" name="searchName" value={searchValue} onChange={handleSearchName} />
+          <label htmlFor="searchCounselor">Tutora:
+            <select name="searchCounselor" id='searchCounselor' value={searchCounselor} onChange={handleSearchCounselor} >
+              <option value="">cualquiera</option>
+              <option value="yanelis">Yanelis</option>
+              <option value="dayana">Dayana</option>
+              <option value="iván">Iván</option>
+            </select>
+          </label>
         </form>
       </header>
       <table className="table">
