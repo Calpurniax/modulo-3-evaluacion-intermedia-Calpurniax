@@ -56,8 +56,10 @@ function App() {
       <header>
         <h1>Adalabers</h1>
         <h2>Busca una Adalaber</h2>
-        <label htmlFor="searchName">Nombre</label>
-        <input type="text" name="searchName" value={searchValue} onChange={handleSearchName} />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="searchName">Nombre</label>
+          <input type="text" name="searchName" value={searchValue} onChange={handleSearchName} />
+        </form>
       </header>
       <table className="table">
         {/* <!-- Fila de cabecera --> */}
