@@ -9,14 +9,31 @@ function App() {
     name: '',
     counselor: '',
     speciality: '',
+    id: '',
   })
 
   //para que no se envíe el formulario al pulsar intro
   const handleSubmit = (ev) => {
     ev.preventDefault();
   };
-  const handleInput = () => { };
-  const handleAdd = () => { };
+  //guardar los input en una nueva variable de estado
+  const handleInput = (ev) => {
+    const inputName = ev.target.name;
+    const inputValue = ev.target.value;
+    setNewAdalaber(
+      { ...newAdalaber, [inputName]: inputValue }
+    )
+  };
+  //añadir el nuevo contacto al array de objetos
+  const handleAdd = () => {
+    setAdalabers([...adalabers, newAdalaber])
+    setNewAdalaber({
+      name: '',
+      counselor: '',
+      speciality: '',
+      id: '',
+    })
+  };
   //pintar la tabla con los contactos
   const renderAdalaber = () => {
     return adalabers.map((each) => (
@@ -41,18 +58,18 @@ function App() {
           {renderAdalaber()}
         </tbody>
       </table>
+      {/* <!-- Formulario nueva Adalaber --> */}
       <section>
         <h2>Añadir una nueva Adalaber</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Nombre:</label>
-          <input type="text" name="name" id="name" onChange={handleInput} />
+          <input type="text" name="name" id="name" value={newAdalaber.name} onChange={handleInput} />
           <label htmlFor="counselor">Tutora:</label>
-          <input type="text" name="counselor" id="counselor" onChange={handleInput} />
+          <input type="text" name="counselor" id="counselor" value={newAdalaber.counselor} onChange={handleInput} />
           <label htmlFor="speciality">Especialidad:</label>
-          <input type="text" name="speciality" id="speciality" onChange={handleInput} />
+          <input type="text" name="speciality" id="speciality" value={newAdalaber.speciality} onChange={handleInput} />
           <button onClick={handleAdd}>Añadir</button>
         </form>
-
       </section>
     </div>
   );
