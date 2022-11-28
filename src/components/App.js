@@ -5,12 +5,18 @@ import { useState } from 'react';
 function App() {
   //variables de estado
   const [adalabers, setAdalabers] = useState(contact.results)
+  const [newAdalaber, setNewAdalaber] = useState({
+    name: '',
+    counselor: '',
+    speciality: '',
+  })
 
   //para que no se envíe el formulario al pulsar intro
   const handleSubmit = (ev) => {
     ev.preventDefault();
   };
   const handleInput = () => { };
+  const handleAdd = () => { };
   //pintar la tabla con los contactos
   const renderAdalaber = () => {
     return adalabers.map((each) => (
@@ -44,6 +50,7 @@ function App() {
           <input type="text" name="counselor" id="counselor" onChange={handleInput} />
           <label htmlFor="speciality">Especialidad:</label>
           <input type="text" name="speciality" id="speciality" onChange={handleInput} />
+          <button onClick={handleAdd}>Añadir</button>
         </form>
 
       </section>
