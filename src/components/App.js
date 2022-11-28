@@ -11,6 +11,7 @@ function App() {
     speciality: '',
     id: '',
   })
+  const [searchValue, setSearchValue] = useState('');
 
   //para que no se envíe el formulario al pulsar intro
   const handleSubmit = (ev) => {
@@ -36,15 +37,19 @@ function App() {
     })
   };
   //filtrar por nombre
-  const handleSearchName = () => { };
+  const handleSearchName = (ev) => {
+    setSearchValue(ev.target.value)
+  };
   //pintar la tabla con los contactos
   const renderAdalaber = () => {
-    return adalabers.map((each) => (
-      <tr key={each.id}>
-        <td>{each.name}</td>
-        <td>{each.counselor}</td>
-        <td>{each.speciality}</td>
-      </tr>))
+    return adalabers
+      .filter((each) => each.name.toLowerCase().includes(searchValue.toLowerCase()))
+      .map((each) => (
+        <tr key={each.id}>
+          <td>{each.name}</td>
+          <td>{each.counselor}</td>
+          <td>{each.speciality}</td>
+        </tr>))
   };
   return (
     <div className='App'>
@@ -52,7 +57,7 @@ function App() {
         <h1>Adalabers</h1>
         <h2>Busca una Adalaber</h2>
         <label htmlFor="searchName">Nombre</label>
-        <input type="text" name="searchName" onChange={handleSearchName} />
+        <input type="text" name="searchName" value={searchValue} onChange={handleSearchName} />
       </header>
       <table className="table">
         {/* <!-- Fila de cabecera --> */}
