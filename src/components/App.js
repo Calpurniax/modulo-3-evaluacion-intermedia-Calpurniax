@@ -1,10 +1,10 @@
 import '../styles/App.scss';
-import contact from '../services/api.json'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchAdalabers } from '../services/api'
 
 function App() {
   //variables de estado
-  const [adalabers, setAdalabers] = useState(contact.results)
+  const [adalabers, setAdalabers] = useState([])
   const [newAdalaber, setNewAdalaber] = useState({
     name: '',
     counselor: '',
@@ -16,7 +16,12 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [searchCounselor, setSearchCounselor] = useState('');
 
-
+  //llamada a la API
+  useEffect(() => {
+    fetchAdalabers().then((data) => {
+      setAdalabers(data.results)
+    })
+  }, []);
   //para que no se envíe el formulario al pulsar intro
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -41,7 +46,6 @@ function App() {
       social_networks: []
     })
   };
-  console.dir(adalabers.social_networks);
   //filtrar por nombre
   const handleSearchName = (ev) => {
     setSearchValue(ev.target.value)
@@ -61,8 +65,8 @@ function App() {
           <td>{each.counselor}</td>
           <td>{each.speciality}</td>
           <td>
-            {each.social_networks.map((socialNetwork) =>
-              <a href={socialNetwork.url}>{socialNetwork.name}</a>)}
+            {each.social_networks.map((socialNetwork, index) =>
+              <a href={socialNetwork.url} key={index}>{socialNetwork.name}</a>)}
           </td>
         </tr>))
   };
