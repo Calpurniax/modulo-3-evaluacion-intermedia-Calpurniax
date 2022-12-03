@@ -15,6 +15,10 @@ function App() {
   //variables de búsqueda
   const [searchValue, setSearchValue] = useState('');
   const [searchCounselor, setSearchCounselor] = useState('');
+  //crear una id variable
+  const randomID = () => {
+    return crypto.randomUUID()
+  }
 
   //llamada a la API
   useEffect(() => {
@@ -30,13 +34,13 @@ function App() {
   const handleInput = (ev) => {
     const inputName = ev.target.name;
     const inputValue = ev.target.value;
-    const randomID = crypto.randomUUID()
     setNewAdalaber(
-      { ...newAdalaber, [inputName]: inputValue, id: randomID }
+      { ...newAdalaber, [inputName]: inputValue, id: randomID() }
     )
   };
   //añadir el nuevo contacto al array de objetos
   const handleAdd = () => {
+    console.log(newAdalaber);
     setAdalabers([...adalabers, newAdalaber])
     setNewAdalaber({
       name: '',
