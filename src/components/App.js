@@ -3,22 +3,23 @@ import { useState, useEffect } from 'react';
 import { fetchAdalabers } from '../services/api'
 
 function App() {
+  //crear una id variable
+  const randomID = () => {
+    return crypto.randomUUID()
+  }
   //variables de estado
   const [adalabers, setAdalabers] = useState([])
   const [newAdalaber, setNewAdalaber] = useState({
     name: '',
     counselor: '',
     speciality: '',
-    id: '',
+    id: randomID(),
     social_networks: []
   })
   //variables de búsqueda
   const [searchValue, setSearchValue] = useState('');
   const [searchCounselor, setSearchCounselor] = useState('');
-  //crear una id variable
-  const randomID = () => {
-    return crypto.randomUUID()
-  }
+
 
   //llamada a la API
   useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
     const inputName = ev.target.name;
     const inputValue = ev.target.value;
     setNewAdalaber(
-      { ...newAdalaber, [inputName]: inputValue, id: randomID() }
+      { ...newAdalaber, [inputName]: inputValue }
     )
   };
   //añadir el nuevo contacto al array de objetos
@@ -46,7 +47,7 @@ function App() {
       name: '',
       counselor: '',
       speciality: '',
-      id: '',
+      id: randomID(),
       social_networks: []
     })
   };
